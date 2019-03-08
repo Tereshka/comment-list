@@ -19,8 +19,6 @@ class NewComment extends Component {
   }
 
   addComment = () => {
-    if (this.state.author.length === 0 || this.state.text.length === 0) return;
-
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', 'hour': '2-digit', minute: '2-digit', 'second': '2-digit' };
     const date  = (new Date()).toLocaleDateString("ru-Ru", options);
 
@@ -44,7 +42,6 @@ class NewComment extends Component {
               value={this.state.author}
               onChange={this.handleAuthorChange} />
           </Col>
-          
         </Form.Group>
         <Form.Group controlId="formText">
           <Form.Control as="textarea" rows="3"
@@ -53,7 +50,13 @@ class NewComment extends Component {
             placeholder="Leave your comment"
           />
         </Form.Group>
-        <Button variant="success" onClick={this.addComment}>Add comment</Button>
+        <Button 
+          disabled={this.state.author.length === 0 || this.state.text.length === 0}
+          variant="success"
+          onClick={this.addComment}
+        >
+          Add comment
+        </Button>
       </Form>
     );
   }
