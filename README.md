@@ -1,4 +1,4 @@
-#comment-list
+# comment-list
 [live demo](https://tereshka.github.io/comment-list/)
 <br>
 React component which can add and display comments. Comments are saved in localStorage, so you can see them again.
