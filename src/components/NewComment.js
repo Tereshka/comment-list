@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import sanitizeHtml from 'sanitize-html';
 
 class NewComment extends Component {
   constructor(props) {
@@ -22,7 +23,12 @@ class NewComment extends Component {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', 'hour': '2-digit', minute: '2-digit', 'second': '2-digit' };
     const date  = (new Date()).toLocaleDateString("ru-Ru", options);
 
-    const newComment = {author: this.state.author, date: date, text: this.state.text};
+    let clean = sanitizeHtml(this.state.text, {
+      allowedTags: [],
+      allowedAttributes: []
+    });
+
+    const newComment = {author: this.state.author, date: date, text: clean};
     let comments = this.props.comments;
     comments.push(newComment);
     this.props.onUpdateComments(comments);
